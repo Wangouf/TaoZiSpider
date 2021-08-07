@@ -134,8 +134,7 @@ class DownL:
         if not os.path.exists('pic'):#盛放图片的目录
             os.mkdir('pic')
         list1= os.listdir('result')
-        list2 = [x for x in list1 if re.match('.json$',x, flags=0)]
-        self._flist = list2.copy()
+        self._flist = list1.copy()
     def _imgdown(self,imgurl:str,dir:str):
         response = requests.get(url=imgurl,headers=DownL._heads)
         name = imgurl.split('/')[-1]#图片名为图片本身名字
