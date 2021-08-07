@@ -146,7 +146,15 @@ class DownL:
             ldic:dict = json.loads(f.read())['imgs']
         list1 = [v for k,v in ldic.items()]
         return list1
-    def run(self):#json文件‘#’前缀为成功，‘@’前缀为失败
+    def write2f(self):#图片链接写入文件
+        f = open('links.txt','a')
+        for item in self._flist:
+            path = f'result\\{item}'
+            list1 = self._json2list(path)
+            for n in list1:
+                f.write(n+'\n')
+        f.close()
+    def run(self):#json文件‘#’前缀为成功，‘@’前缀为失败(太容易失败了)
         for item in self._flist:
             path = f'result\\{item}'
             list1 = self._json2list(path)
