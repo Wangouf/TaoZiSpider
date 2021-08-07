@@ -146,7 +146,7 @@ class DownL:
             ldic:dict = json.loads(f.read())['imgs']
         list1 = [v for k,v in ldic.items()]
         return list1
-    def write2f(self):#图片链接写入文件
+    def write2f(self):#图片链接写入文件后迅雷下载
         f = open('links.txt','a')
         for item in self._flist:
             path = f'result\\{item}'
