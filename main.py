@@ -168,4 +168,6 @@ class DownL:
 if __name__ == '__main__':
     t = TiaoZi('https://peachring.com/weibo/user/3972954596/',proxyport=7890)#clash本地代理端口
     t.run()#测试
+    o = DownL()
+    o.write2f()
 
