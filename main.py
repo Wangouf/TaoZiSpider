@@ -4,6 +4,7 @@ import json
 import lxml
 import os
 import re
+
 class _Box:#单条微博容器
     def __init__(self,text:str,time:str,imgs:list):
         self.text = text
@@ -19,7 +20,7 @@ class TiaoZi:
             os.mkdir('result')
         self._url1st = url
         self._url = url
-        self._path = 'result\\'
+        self._path = os.path.join("result","")
         self._pageslist = []
         self._result = []
         self._html = ''
@@ -99,6 +100,7 @@ class TiaoZi:
                 for k,v in self._dic.items():
                     with open(self._path+k,'w') as f:
                         f.write(v)
+                        print("Write json:"+k)
                 try:
                     self._url = self._getnextpag()
                 except Exception as e:
@@ -149,10 +151,11 @@ class DownL:
     def write2f(self):#图片链接写入文件后迅雷下载
         f = open('links.txt','a')
         for item in self._flist:
-            path = f'result\\{item}'
+            path = os.path.join("result",item)
             list1 = self._json2list(path)
             for n in list1:
                 f.write(n+'\n')
+        print("Transfer to link.txt successful.")
         f.close()
     def run(self):#json文件‘#’前缀为成功，‘@’前缀为失败(太容易失败了)
         for item in self._flist:
@@ -162,9 +165,9 @@ class DownL:
                 try:
                     self._imgdown(n,'pic')
                 except Exception as e:
-                    os.rename(path, f'result\\@{item}')
+                    os.rename(os.path.join("result",item))
                     raise e
-            os.rename(path,f'result\\#{item}')
+            os.rename(path,os.path.join("result",item))
 if __name__ == '__main__':
     t = TiaoZi('https://peachring.com/weibo/user/3972954596/',proxyport=7890)#clash本地代理端口
     t.run()#测试
